@@ -15,3 +15,15 @@ toDigits x = let quotient = div x 10
 toDigitsRev :: Integer -> [Integer]
 toDigitsRev x = reverse' $ toDigits x
     where reverse' (a:as) = reverse as ++ [a]
+
+-- Exercise2
+doubleEveryOther :: [Integer] -> [Integer]
+doubleEveryOther xs = fst $
+    foldr (\curr (acc, include) ->
+        if include then (curr * 2 : acc, False)
+        else (curr : acc, True)
+    ) ([] , False) xs
+
+-- Exercise3
+sumDigits :: [Integer] -> Integer
+sumDigits ns = foldr (\acc curr -> curr + (sum $ toDigits acc)) 0 ns
