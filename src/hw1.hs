@@ -27,3 +27,19 @@ doubleEveryOther xs = fst $
 -- Exercise3
 sumDigits :: [Integer] -> Integer
 sumDigits ns = foldr (\acc curr -> curr + (sum $ toDigits acc)) 0 ns
+
+-- Exercise4
+validate :: Integer -> Bool
+validate n = mod (sumDigits . doubleEveryOther . toDigits $ n) 10 == 0
+
+
+{-
+    https://www.seas.upenn.edu/~cis194/spring13/hw/01-intro.pdf
+    The Towers of Hanoi
+-}
+type Peg = String
+type Move = (Peg, Peg)
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi n source target aux = if n > 0
+    then hanoi (n - 1) source aux target ++ [(source, target)] ++ hanoi (n - 1) aux target source
+    else []
