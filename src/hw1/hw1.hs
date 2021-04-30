@@ -15,6 +15,7 @@ toDigits x = let quotient = div x 10
 toDigitsRev :: Integer -> [Integer]
 toDigitsRev x = reverse' $ toDigits x
     where reverse' (a:as) = reverse as ++ [a]
+          reverse' [] = []
 
 -- Exercise2
 doubleEveryOther :: [Integer] -> [Integer]
